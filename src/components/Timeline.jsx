@@ -23,12 +23,12 @@ export default function Timeline({ data }) {
   }, []);
 
   return (
-    <div className="relative flex justify-center py-8 w-full max-w-3xl mx-auto">
+    <div className="relative flex justify-center py-10 w-full max-w-4xl mx-auto">
       {/* 수직 라인 */}
-      <div className="absolute left-[1.5rem] top-0 bottom-0 w-[3px] bg-gray-200"></div>
+      <div className="absolute left-[1.6rem] top-0 bottom-0 w-[5px] bg-emerald-200"></div>
 
       {/* 타임라인 아이템들 */}
-      <div className="flex flex-col gap-8 pl-10 w-full relative">
+      <div className="flex flex-col gap-10 pl-14 w-full relative">
         {data.map((d, i) => {
           // 라인 색상 분기
           const lineColor =
@@ -37,6 +37,20 @@ export default function Timeline({ data }) {
               : d.color === "green"
               ? "border-emerald-500"
               : "border-rose-500";
+
+          const accentClasses =
+            d.color === "gray"
+              ? "border-slate-400 bg-slate-50 text-slate-900"
+              : d.color === "green"
+              ? "border-emerald-500 bg-emerald-50 text-emerald-900"
+              : "border-rose-500 bg-rose-50 text-rose-900";
+
+          const headlineColor =
+            d.color === "green"
+              ? "text-emerald-900"
+              : d.color === "red"
+              ? "text-rose-900"
+              : "text-slate-900";
 
           const isLast = i === data.length - 1;
 
@@ -48,13 +62,13 @@ export default function Timeline({ data }) {
               className="relative flex items-start"
             >
               {/* 왼쪽 타임라인 */}
-              <div className="relative flex flex-col items-center mr-4">
+              <div className="relative flex flex-col items-center mr-6">
                 {/* 위쪽 라인 */}
                 {i > 0 && (
                   <div
-                    className={`absolute top-0 w-[3px] ${
+                    className={`absolute top-0 w-[5px] ${
                       d.color === "gray"
-                        ? "bg-gray-300"
+                        ? "bg-slate-300"
                         : d.color === "green"
                         ? "bg-emerald-500"
                         : "bg-rose-500"
@@ -65,19 +79,19 @@ export default function Timeline({ data }) {
 
                 {/* 점 */}
                 <div
-                  className={`relative z-10 w-5 h-5 rounded-full border-4 ${lineColor} ${
+                  className={`relative z-10 w-7 h-7 rounded-full border-[6px] ${lineColor} ${
                     d.color === "gray"
-                      ? "bg-gray-300"
+                      ? "bg-slate-300"
                       : d.color === "green"
                       ? "bg-emerald-500"
                       : "bg-rose-500"
-                  } shadow-md`}
+                  } shadow-xl`}
                 ></div>
 
                 {/* 아래쪽 라인 */}
                 {!isLast && (
                   <div
-                    className={`absolute bottom-0 w-[3px] ${
+                    className={`absolute bottom-0 w-[5px] ${
                       d.color === "red"
                         ? "bg-rose-500"
                         : d.color === "green"
@@ -90,29 +104,33 @@ export default function Timeline({ data }) {
               </div>
 
               {/* 오른쪽 내용 */}
-              <div className="ml-2">
-                <h3 className="font-semibold text-gray-900 text-xl">
+              <div
+                className={`ml-2 rounded-3xl px-8 py-6 shadow-lg border-l-8 ${accentClasses}`}
+              >
+                <h3 className={`font-extrabold text-3xl ${headlineColor}`}>
                   {d.label}
                 </h3>
                 {d.isFuture && d.relativeLabel && (
-                  <p className="text-sm text-gray-500 mb-3">
+                  <p className="text-xl text-slate-600 font-semibold mt-2">
                     {d.relativeLabel}
                   </p>
                 )}
                 <p
-                  className={`text-base font-semibold ${
+                  className={`text-2xl font-bold mt-4 ${
                     d.color === "green"
                       ? "text-emerald-700"
                       : d.color === "red"
                       ? "text-rose-700"
-                      : "text-gray-700"
+                      : "text-slate-700"
                   }`}
                 >
                   누적 이자{" "}
-                  <span className="text-gray-800">
+                  <span className="text-slate-900">
                     {d.cumulative.toLocaleString("ko-KR")}원
                   </span>{" "}
-                  <span className="text-gray-400 text-sm">({d.korean})</span>
+                  <span className="text-slate-500 text-lg font-medium">
+                    ({d.korean})
+                  </span>
                 </p>
               </div>
             </div>
