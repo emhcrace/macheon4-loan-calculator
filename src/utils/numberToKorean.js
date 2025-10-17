@@ -1,8 +1,9 @@
 export function numberToKorean(number) {
   if (!number) return "영원";
 
-  // 1️⃣ 백만원 단위 내림
-  number = Math.floor(number / 1_000_000) * 1_000_000;
+  // 1️⃣ 표현 단위 선택 (1천만원 이하는 십만원 단위 유지)
+  const roundingUnit = number <= 10_000_000 ? 100_000 : 1_000_000;
+  number = Math.floor(number / roundingUnit) * roundingUnit;
 
   // 2️⃣ 억, 천만, 백만까지만 처리
   const units = ["", "만", "억", "조", "경"];
@@ -27,10 +28,14 @@ export function numberToKorean(number) {
     unitIndex++;
   }
 
-  // 3️⃣ ‘십만, 만, 천원’ 이하 단위 제거
-  result = result
-    .replace(/십만.*$/, "만원") // 10만 이하 제거
-    .replace(/만$/, "만원");
+  // 3️⃣ ‘십만, 만, 천원’ 이하 단위 제거 (단, 1천만원 이하는 유지)
+  if (roundingUnit > 100_000) {
+    result = result
+      .replace(/십만.*$/, "만원") // 10만 이하 제거
+      .replace(/만$/, "만원");
+  } else {
+    result = result.replace(/만$/, "만원");
+  }
 
   // 4️⃣ 중복 제거 및 단위 보정
   result = result.replace(/만원만원$/, "만원").replace(/원$/, "");
