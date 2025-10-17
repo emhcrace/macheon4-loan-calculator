@@ -7,10 +7,10 @@ export default function LoanAmountSelector({ setAmount }) {
   const range = (n) => [...Array(n).keys()];
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center mb-4 text-lg font-medium text-gray-700">
+    <div className="flex flex-wrap gap-6 justify-center mb-8 text-2xl font-bold text-emerald-900">
       <select
         onChange={(e) => handleChange("eok", e.target.value)}
-        className="border rounded-lg px-4 py-2 bg-gray-50 focus:ring-2 focus:ring-emerald-300"
+        className="border-4 border-emerald-300 rounded-2xl px-6 py-4 bg-white shadow-md focus:outline-none focus:ring-4 focus:ring-emerald-400 text-emerald-900"
       >
         <option value="0">0억</option>
         {range(10).map((i) => (
@@ -22,7 +22,7 @@ export default function LoanAmountSelector({ setAmount }) {
 
       <select
         onChange={(e) => handleChange("cheon", e.target.value)}
-        className="border rounded-lg px-4 py-2 bg-gray-50 focus:ring-2 focus:ring-emerald-300"
+        className="border-4 border-emerald-300 rounded-2xl px-6 py-4 bg-white shadow-md focus:outline-none focus:ring-4 focus:ring-emerald-400 text-emerald-900"
       >
         <option value="0">0천</option>
         {range(10).map((i) => (
@@ -34,7 +34,7 @@ export default function LoanAmountSelector({ setAmount }) {
 
       <select
         onChange={(e) => handleChange("baek", e.target.value)}
-        className="border rounded-lg px-4 py-2 bg-gray-50 focus:ring-2 focus:ring-emerald-300"
+        className="border-4 border-emerald-300 rounded-2xl px-6 py-4 bg-white shadow-md focus:outline-none focus:ring-4 focus:ring-emerald-400 text-emerald-900"
       >
         <option value="0">0백</option>
         {range(10).map((i) => (

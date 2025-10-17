@@ -88,9 +88,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center py-12 px-6">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-8">
-        <h1 className="text-3xl font-extrabold text-center text-emerald-700 mb-6">
+    <div className="min-h-screen bg-emerald-100 flex justify-center py-16 px-6">
+      <div className="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-4xl p-12 border-4 border-emerald-200">
+        <h1 className="text-4xl md:text-5xl font-black text-center text-emerald-800 tracking-tight mb-8">
           💰 마천4구역 조합원 대출 이자 타임라인
         </h1>
 
@@ -99,7 +99,7 @@ export default function App() {
         <div className="text-center mt-4">
           <button
             onClick={handleCalculate}
-            className="bg-emerald-500 hover:bg-emerald-600 text-white text-lg px-6 py-3 rounded-xl font-semibold transition-all"
+            className="bg-emerald-600 hover:bg-emerald-700 focus-visible:ring-4 focus-visible:ring-emerald-300 text-white text-2xl px-10 py-4 rounded-2xl font-bold transition-all shadow-lg"
           >
             계산하기
           </button>
