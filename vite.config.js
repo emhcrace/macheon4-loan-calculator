@@ -4,10 +4,10 @@ import tailwindcss from "tailwindcss";
 
 export default defineConfig({
   plugins: [react()],
+  base: "/macheon4-loan-calculator/",
   css: {
     postcss: {
       plugins: [tailwindcss()],
-      base: "/macheon4-loan-calculator/",
     },
   },
 });
