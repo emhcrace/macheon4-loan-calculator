@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import TimelineItem from "./TimelineItem";
 
 export default function Timeline({ data }) {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [, setActiveIndex] = useState(null);
   const refs = useRef([]);
 
   useEffect(() => {
@@ -96,7 +95,9 @@ export default function Timeline({ data }) {
                   {d.label}
                 </h3>
                 {d.isFuture && d.relativeLabel && (
-                  <p className="text-sm text-gray-500 mb-3">{d.relativeLabel}</p>
+                  <p className="text-sm text-gray-500 mb-3">
+                    {d.relativeLabel}
+                  </p>
                 )}
                 <p
                   className={`text-base font-semibold ${
