@@ -95,7 +95,9 @@ export default function Timeline({ data }) {
                 <h3 className="font-semibold text-gray-900 text-xl">
                   {d.label}
                 </h3>
-                <p className="text-sm text-gray-500 mb-3"></p>
+                {d.isFuture && d.relativeLabel && (
+                  <p className="text-sm text-gray-500 mb-3">{d.relativeLabel}</p>
+                )}
                 <p
                   className={`text-base font-semibold ${
                     d.color === "green"
