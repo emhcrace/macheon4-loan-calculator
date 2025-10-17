@@ -70,7 +70,8 @@ export default function App() {
       const label = `${current.getFullYear()}년 ${current.getMonth() + 1}월`;
       const cumulative = monthlyInterest * (i + 1);
 
-      const relativeLabel = current > today ? getRelativeTimeText(today, current) : "";
+      const relativeLabel =
+        current > today ? getRelativeTimeText(today, current) : "";
 
       data.push({
         date: current,
@@ -91,7 +92,7 @@ export default function App() {
     <div className="min-h-screen bg-emerald-100 flex justify-center py-16 px-6">
       <div className="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-4xl p-12 border-4 border-emerald-200">
         <h1 className="text-4xl md:text-5xl font-black text-center text-emerald-800 tracking-tight mb-8">
-          💰 마천4구역 조합원 대출 이자 타임라인
+          💰 마천4구역 조합원 대출 이자
         </h1>
 
         <LoanAmountSelector setAmount={setAmount} />
