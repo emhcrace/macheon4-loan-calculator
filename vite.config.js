@@ -7,6 +7,7 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [tailwindcss()],
+      base: "/macheon4-loan-calculator/",
     },
   },
 });
