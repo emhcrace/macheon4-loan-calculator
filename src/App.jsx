@@ -8,6 +8,32 @@ const START_DATE = new Date(2024, 9, 1); // 2024년 10월
 const GREEN_END = new Date(2027, 5, 30);
 const RED_END = new Date(2032, 11, 31);
 
+const getRelativeTimeText = (fromDate, toDate) => {
+  const base = new Date(fromDate.getFullYear(), fromDate.getMonth(), 1);
+  const target = new Date(toDate.getFullYear(), toDate.getMonth(), 1);
+
+  const diffMonths =
+    (target.getFullYear() - base.getFullYear()) * 12 +
+    (target.getMonth() - base.getMonth());
+
+  if (diffMonths <= 0) return "";
+
+  const years = Math.floor(diffMonths / 12);
+  const months = diffMonths % 12;
+  const monthsText = `${diffMonths}개월 후`;
+
+  if (years === 0) {
+    return `(${monthsText})`;
+  }
+
+  const parts = [];
+  if (years > 0) parts.push(`${years}년`);
+  if (months > 0) parts.push(`${months}개월`);
+  const yearsText = `${parts.join(" ")} 후`;
+
+  return `(${monthsText}, ${yearsText})`;
+};
+
 export default function App() {
   const [amount, setAmount] = useState({ eok: 0, cheon: 0, baek: 0 });
   const [timeline, setTimeline] = useState([]);
@@ -44,6 +70,8 @@ export default function App() {
       const label = `${current.getFullYear()}년 ${current.getMonth() + 1}월`;
       const cumulative = monthlyInterest * (i + 1);
 
+      const relativeLabel = current > today ? getRelativeTimeText(today, current) : "";
+
       data.push({
         date: current,
         label,
@@ -52,6 +80,7 @@ export default function App() {
         korean: numberToKorean(cumulative),
         color,
         isFuture: current > today,
+        relativeLabel,
       });
     }
 
