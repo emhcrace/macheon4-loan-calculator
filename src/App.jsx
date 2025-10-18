@@ -3,8 +3,8 @@ import LoanAmountSelector from "./components/LoanAmountSelector";
 import Timeline from "./components/Timeline";
 import { numberToKorean } from "./utils/numberToKorean";
 
-const RATE = 0.053;
-const START_DATE = new Date(2024, 9, 1); // 2024년 10월
+const RATE = 0.033;
+const START_DATE = new Date(2024, 9, 23); // 2024년 10월
 const GREEN_END = new Date(2027, 5, 30);
 const RED_END = new Date(2032, 11, 31);
 
