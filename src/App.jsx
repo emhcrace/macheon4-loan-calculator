@@ -89,8 +89,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-emerald-100 flex justify-center py-16 px-6">
-      <div className="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-4xl p-12 border-4 border-emerald-200">
+    <div className="bg-white rounded-[2rem] shadow-2xl w-full max-w-4xl p-12 border-4 border-emerald-200">
+      <div>
         <h1 className="text-4xl md:text-4xl font-black text-center text-emerald-800 tracking-tight mb-12 mt-12">
           💰 마천4구역 조합원 대출 이자
         </h1>
