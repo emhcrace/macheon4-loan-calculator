@@ -3,7 +3,11 @@ import LoanAmountSelector from "./components/LoanAmountSelector";
 import Timeline from "./components/Timeline";
 import { numberToKorean } from "./utils/numberToKorean";
 
-const RATE = 0.033;
+const RATE_OPTIONS = [
+  { id: "base-30", label: "기본이주비 대출 3.0%", value: 0.03 },
+  { id: "base-33", label: "기본이주비 대출 3.3%", value: 0.033 },
+  { id: "extra-45", label: "추가이주비 대출 4.5%", value: 0.045 },
+];
 const START_DATE = new Date(2024, 9, 23); // 2024년 10월
 const GREEN_END = new Date(2027, 5, 30);
 const RED_END = new Date(2032, 11, 31);
@@ -37,6 +41,7 @@ const getRelativeTimeText = (fromDate, toDate) => {
 export default function App() {
   const [amount, setAmount] = useState({ eok: 0, cheon: 0, baek: 0 });
   const [timeline, setTimeline] = useState([]);
+  const [selectedRate, setSelectedRate] = useState(RATE_OPTIONS[0]);
 
   const principal = useMemo(() => {
     return (
@@ -56,7 +61,7 @@ export default function App() {
       (RED_END.getMonth() - START_DATE.getMonth()) +
       1;
 
-    const monthlyInterest = principal * (RATE / 12);
+    const monthlyInterest = principal * (selectedRate.value / 12);
     const data = [];
 
     for (let i = 0; i < totalMonths; i++) {
@@ -82,6 +87,7 @@ export default function App() {
         color,
         isFuture: current > today,
         relativeLabel,
+        rateLabel: selectedRate.label,
       });
     }
 
@@ -96,6 +102,31 @@ export default function App() {
         </h1>
 
         <LoanAmountSelector setAmount={setAmount} />
+
+        <div className="flex flex-wrap justify-center gap-4 mt-6">
+          {RATE_OPTIONS.map((option) => {
+            const isActive = option.id === selectedRate.id;
+            const baseClasses =
+              "px-6 py-3 rounded-2xl text-xl font-semibold transition-all border-4";
+            const activeClasses =
+              "bg-emerald-600 text-white border-emerald-500 shadow-lg";
+            const inactiveClasses =
+              "bg-white text-emerald-800 border-emerald-300 hover:bg-emerald-50";
+
+            return (
+              <button
+                key={option.id}
+                type="button"
+                onClick={() => setSelectedRate(option)}
+                className={`${baseClasses} ${
+                  isActive ? activeClasses : inactiveClasses
+                }`}
+              >
+                {option.label}
+              </button>
+            );
+          })}
+        </div>
 
         <div className="text-center mt-4">
           <button
